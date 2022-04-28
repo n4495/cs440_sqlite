@@ -3,12 +3,20 @@ import tkinter as tk
 from PIL import Image
 from PIL import ImageTk
 from pygame import mixer
+import uuid
+import sqlite3
 
 def callback1(*args):
     print("callback1!")
+    con = sqlite3.connect('storeDB.db')
+    cur = con.cursor()
+    result = cur.execute('''SELECT * FROM Employees;''')
+    for each in result:
+        print(each)
+
+
     mixer.music.load("moan2.wav")
     mixer.music.play()
-
 
 def main():
     print("main\n")
