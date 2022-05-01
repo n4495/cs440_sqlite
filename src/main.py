@@ -1,72 +1,44 @@
-#!/bin/python3
 import tkinter as tk
-from PIL import Image
-from PIL import ImageTk
-from pygame import mixer
-import uuid
-import sqlite3
+import tkinter.ttk as ttk
+from PIL import ImageTk, Image
 
-def callback1(*args):
-    print("callback1!")
-    con = sqlite3.connect('storeDB.db')
-    cur = con.cursor()
-    result = cur.execute('''SELECT * FROM Employees;''')
-    for each in result:
-        print(each)
-
-
-    mixer.music.load("moan2.wav")
-    mixer.music.play()
+import main_layout
+import mgr_layout
 
 def main():
-    print("main\n")
-    mixer.init()
-    window = tk.Tk() # Create TKinter window obj
-    #window2 = tk.Tk() # Create TKinter window obj
+	HEIGHT = 1000 # This is still bad, but less so
+	WIDTH = 900
 
-    # Create a label widget (can do text/image)
+	root = tk.Tk()
+	root.geometry("900x1000")
+	root.attributes('-type', 'dialog')
 
-    button = tk.Button(
-        window,
-        text="This is a button!",
-        width=40,
-        height=10,
-        bg="orange",
-        fg="black",
-        command=callback1
-    )
-    button.pack()
+	headerImg = ImageTk.PhotoImage(Image.open("../images/bobs_bolts_header.png"))
+	headerLbl = tk.Label(root, image=headerImg).pack()
 
-    text = tk.Label(text="hello",
-                    fg="pink",
-                    bg="green",
-        #            height=5,
-        #            width=20
-                    )
-    text.pack() # Put widget into the window
+	# Create our main menu tab widget
+	tabs = ttk.Notebook(root)
+	tabs.pack() #Place it onto the root window
 
-    entryObj = tk.Entry(
-        fg="black",
-        bg="white",
-        width=50,
-    )
-    entryObj.pack()
 
-#    intput = entryObj.get()
+	# Set up frames which will be contained in our tabs
+	main_frame = tk.Frame(tabs, bg="red", width=WIDTH, height=WIDTH)
+	# Pass frame object for setup and get it back
+	main_frame = main_layout.main_setup(main_frame)
 
-    # Create a new image object using a file path
-    image1 = Image.open("../images/duck.jpeg")
-    # Resassign image to a PIL image
-    image1 = ImageTk.PhotoImage(image1)
-    tk.Label(image=image1).pack()
+	manager_frame = tk.Frame(tabs, bg="blue", width=HEIGHT, height=HEIGHT)
+	manager_frame = mgr_layout.mgr_setup(manager_frame)
 
-    textbox = tk.Text()
-    textbox.pack()
+	main_frame.pack(fill="both", expand=True)
+	manager_frame.pack(fill="both", expand=True)
 
-    #image1.resize((100,100), Image.ANTIALIAS)
-    window.mainloop()# Run the event loop
+	tabs.add(main_frame, text="Main Menu")
+	tabs.add(manager_frame, text="Manager Menu")
 
-    print(input)
+	root.mainloop()
+	return
 
-if __name__ == "__main__":
-    main()
+
+if (__name__ == "__main__"):
+	main()
+
