@@ -55,8 +55,22 @@ def main_setup(in_frame):
                                                            uuid_info_in.get()))
     uuid_info_btn.grid(row=1,column=0) 
 
-    frame4 = tk.Frame(in_frame,bg="pink", width=W, height=H)
-    frame4.grid(row=2,column=0)
+    date_sale_frame = tk.Frame(in_frame,bg="pink", width=W, height=H)
+    date_sale_frame.grid(row=2,column=0)
+
+    date_sale_lbl = tk.Label(
+        date_sale_frame, text="Lookup number of sales exceeding an amount by date",)
+    date_sale_lbl.grid(row=0, column=0, columnspan=2)
+
+    date_sale_in = tk.Entry(date_sale_frame)
+    date_sale_in.grid(row=1,column=1)
+
+    date_sale_btn = tk.Button(date_sale_frame, bg="purple",fg="orange",
+                              text="Go!",
+                              command=lambda:get_date_sale(txt_out,
+                                                           date_sale_in.get()))
+    date_sale_btn.grid(row=1,column=0)
+
 
     frame5 = tk.Frame(in_frame,bg="blue", width=W, height=H)
     frame5.grid(row=2,column=1)

@@ -14,6 +14,26 @@ def get_emp_info(txt_out):
 		txt_out.insert(tk.END, str(each) + "\n")
 
 	con.close()
+
+
+def get_date_sale(txt_out, num):
+	con = sq.connect('../test_db/storeDB.db')
+	cur = con.cursor()
+	num = int(num)
+	results = cur.execute('''
+					SELECT Sales.Date, COUNT(Sales.date)
+					FROM Sales
+					WHERE Sales.Dollar_amount >{:d} 
+					GROUP BY Sales.Date;
+					   '''.format(num))
+	txt_out.delete(0.0, tk.END)
+	txt_out.insert(tk.END,"Date | Count\n")
+
+	for each in results:
+		txt_out.insert(tk.END, str(each) + "\n")
+
+	con.close()
+
 def get_sale_info(txt_out, num):
 	# Run SQL query to get all sales with a dollar amount greater than num
 	con = sq.connect('../test_db/storeDB.db')
