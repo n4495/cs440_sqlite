@@ -59,7 +59,7 @@ def main_setup(in_frame):
     date_sale_frame.grid(row=2,column=0)
 
     date_sale_lbl = tk.Label(
-        date_sale_frame, text="Lookup number of sales exceeding an amount by date",)
+        date_sale_frame, text="Lookup number of sales exceeding an amount by date")
     date_sale_lbl.grid(row=0, column=0, columnspan=2)
 
     date_sale_in = tk.Entry(date_sale_frame)
@@ -72,8 +72,21 @@ def main_setup(in_frame):
     date_sale_btn.grid(row=1,column=0)
 
 
-    frame5 = tk.Frame(in_frame,bg="blue", width=W, height=H)
-    frame5.grid(row=2,column=1)
+    get_aisle = tk.Frame(in_frame,bg="blue", width=W, height=H)
+    get_aisle.grid(row=2,column=1)
+
+    get_aisle_lbl = tk.Label(
+        get_aisle, text="Get aisles belonging to a department")
+    get_aisle_lbl.grid(row=0, column=0, columnspan=2)
+
+    get_aisle_in = tk.Entry(get_aisle)
+    get_aisle_in.grid(row=1, column=1)
+
+    get_aisle_btn = tk.Button(get_aisle, bg="green",fg = "yellow",
+                              text="Go!",
+                              command=lambda:get_aisles(txt_out,
+                                                        get_aisle_in.get()))
+    get_aisle_btn.grid(row=1,column=0)
 
     frame6 = tk.Frame(in_frame,bg="grey", width=W, height=H)
     frame6.grid(row=2,column=2)

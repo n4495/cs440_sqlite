@@ -3,6 +3,24 @@ import tkinter.ttk as ttk
 from PIL import ImageTk, Image
 import sqlite3 as sq
 
+def get_aisles(txt_out, txt_in):
+	# Why does this want a float!?!?
+	con = sq.connect('../test_db/storeDB.db')
+	cur = con.cursor()
+	txt_in = str(txt_in)
+	results = cur.execute('''
+				SELECT department.aisles
+				FROM department
+				WHERE department.dept_name == '{name1}'
+					   '''.format(name1=txt_in))
+	txt_out.delete(0.0, tk.END)
+
+	txt_out.insert(tk.END,"Aisle Number\n")
+	for each in results:
+		txt_out.insert(tk.END, str(each) + "\n")
+
+	con.close()
+
 def get_emp_info(txt_out):
 	# Why does this want a float!?!?
 	con = sq.connect('../test_db/storeDB.db')
