@@ -39,8 +39,21 @@ def main_setup(in_frame):
                                                            sale_info_in.get()))
     sale_info_btn.grid(row=1,column=0)
 
-    dept_info = tk.Frame(in_frame,bg="green", width=W, height=H)
-    dept_info.grid(row=1,column=2)
+    uuid_lookup_frame = tk.Frame(in_frame,bg="green", width=W, height=H)
+    uuid_lookup_frame.grid(row=1,column=2)
+
+    uuid_lookup_lbl = tk.Label(
+        uuid_lookup_frame, text="Lookup merchandise by uuid")
+    uuid_lookup_lbl.grid(row=0,column=0,columnspan=2)
+
+    uuid_info_in = tk.Entry(uuid_lookup_frame)
+    uuid_info_in.grid(row=1,column=1)
+
+    uuid_info_btn = tk.Button(uuid_lookup_frame, bg="green", fg="blue",
+                              text="Go!",
+                              command=lambda:get_uuid_info(txt_out,
+                                                           uuid_info_in.get()))
+    uuid_info_btn.grid(row=1,column=0) 
 
     frame4 = tk.Frame(in_frame,bg="pink", width=W, height=H)
     frame4.grid(row=2,column=0)

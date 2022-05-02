@@ -23,12 +23,31 @@ def get_sale_info(txt_out, num):
 						SELECT Sales.date, Sales.dollar_amount,
 						Sales.last_four_card
 						FROM sales
-						WHERE sales.dollar_amount > {:d} 
+						WHERE sales.dollar_amount > {:d}
 					   '''.format(num))
 	txt_out.delete(0.0, tk.END)
 
+	txt_out.insert(tk.END,"Date | Dollar Amount | Last four of card\n")
 	for each in results:
 		txt_out.insert(tk.END, str(each) + "\n")
 	con.close()
 
+
+
+def get_uuid_info(txt_out, num):
+	# Run SQL query to get all sales with a dollar amount greater than num
+	con = sq.connect('../test_db/storeDB.db')
+	cur = con.cursor()
+	num = int(num)
+	results = cur.execute('''
+		SELECT merchandise.product_name, merchandise.quantity,merchandise.price
+		FROM  merchandise
+		WHERE merchandise.UPC = {:d}
+					   '''.format(num))
+	txt_out.delete(0.0, tk.END)
+
+	txt_out.insert(tk.END,"Name | Quant | Price\n")
+	for each in results:
+		txt_out.insert(tk.END, str(each) + "\n")
+	con.close()
 	return
