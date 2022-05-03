@@ -21,16 +21,17 @@ def update_department_name(in_frame,txt_in, txt_in2):
 	con.close()
 
 	#department.dept_name == '{name2}'
-def update_salary(txt_in,num):
+def update_salary(in_frame, txt_in, num):
 	con = sq.connect('../test_db/storeDB.db')
 	cur = con.cursor()
 	txt_in = str(txt_in)
 	num = int(num)
 	results = cur.execute('''
 				UPDATE Employees
-				SET salary == '{salary1}'
+				SET salary == {salary1}
 				WHERE
-				Employees.employee == '{name1}'
+				Employees.given_name == "{name1}"
 				'''.format(salary1=num, name1=txt_in))
+	con.commit()
 	con.close()
 

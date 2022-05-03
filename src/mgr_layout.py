@@ -26,7 +26,22 @@ def mgr_setup(in_frame):
 					upt_dept_in.get(), upt_dept_in2.get()))
 	upt_dept_btn.grid(row=1,column=0)
 
+	#~~~~~~~~~~~
+	update_sal_frame = tk.Frame(in_frame,width=W,height=H)
+	update_sal_frame.grid(row=1,column=1)
 
+	update_sal_lbl = tk.Label(update_sal_frame,
+						text="Update Salary of Employee")
+	update_sal_lbl.grid(row=0,column=0)
+
+	update_sal_in = tk.Entry(update_sal_frame)
+	update_sal_in.grid(row=1,column=1)
+	update_sal_in2 = tk.Entry(update_sal_frame)
+	update_sal_in2.grid(row=1,column=2)
+
+	update_sal_btn = tk.Button(update_sal_frame, text="Go!",
+							command=lambda:update_salary(in_frame,update_sal_in.get(),update_sal_in2.get()))
+	update_sal_btn.grid(row=1,column=0)
 
 
 
