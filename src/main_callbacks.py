@@ -113,7 +113,7 @@ def update_salary(txt_in,num):
 				SET salary == '{salary1}'
 				
 				WHERE 
-				Employees.employee == '{name1}'
+				Employees.given_name == '{name1}'
 					   '''.format(salary1=num, name1=txt_in))
 	con.close()
 
