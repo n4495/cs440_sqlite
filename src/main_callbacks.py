@@ -89,3 +89,33 @@ def get_uuid_info(txt_out, num):
 		txt_out.insert(tk.END, str(each) + "\n")
 	con.close()
 	return
+def update_department_name(txt_in, txt_in2):
+	# Takes the old name and desired name as input
+	con = sq.connect('../test_db/storeDB.db')
+	cur = con.cursor()
+	txt_in = str(txt_in)
+	txt_in = str(txt_in2)
+	results = cur.execute('''
+				UPDATE department
+				SET dept_name == '{name1}'
+				
+				WHERE 
+				department.dept_name == '{name2}'
+					   '''.format(name1=txt_in, name2=txt_in2))
+	con.close()
+def update_salary(txt_in,num):
+	con = sq.connect('../test_db/storeDB.db')
+	cur = con.cursor()
+	txt_in = str(txt_in)
+	num = int(num)
+	results = cur.execute('''
+				UPDATE Employees
+				SET salary == '{salary1}'
+				
+				WHERE 
+				Employees.employee == '{name1}'
+					   '''.format(salary1=num, name1=txt_in))
+	con.close()
+
+	
+
